@@ -1,21 +1,63 @@
+:root {
+  --page-bg: #51b9e3;
+  --content-width: 414px;
+  --side-padding: 42px;
+  --font-main: "DotGothic16", sans-serif;
+  --text-color: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
 body {
-    background-color: #51B9E3;
-    color: white;
+  margin: 0;
+  min-height: 100%;
 }
 
-.header {
-    display: flex;
-    justify-self: center;
-    flex-direction: column;
+body {
+  background: var(--page-bg);
+  color: var(--text-color);
+  font-family: var(--font-main);
 }
 
-.header h2 {
-    display: flex;
-    padding-left: auto;
+/* 幅を絞ったブロックを中央に置く。中の文字は左揃えのまま */
+.site {
+  width: min(100%, var(--content-width));
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 42px var(--side-padding) 18px;
+  display: flex;
+  flex-direction: column;
 }
 
-.header p {
-    display: flex;
-    padding-left: auto;
-    margin-top: 0;
+.site-header {
+  margin: 0 0 46px;
+}
+
+.site-header h1 {
+  margin: 0;
+  font-size: 25px;
+  line-height: 1;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+}
+
+.site-header p {
+  margin: 12px 0 0;
+}
+
+@media (max-width: 360px) {
+  :root {
+    --side-padding: 28px;
+  }
+
+  .site {
+    padding-top: 30px;
+  }
+
+  .site-header h1 {
+    font-size: 22px;
+  }
 }
