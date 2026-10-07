@@ -453,3 +453,37 @@ body {
   fill: currentColor;
   flex-shrink: 0;
 }
+
+/* ---------- 名前の横のアイコン ---------- */
+
+.site-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* 白い枠とずらし影で、見出しと同じドット絵っぽさに揃える */
+.avatar {
+  width: 72px;
+  height: 72px;
+  flex-shrink: 0;
+  border: 3px solid var(--text-color);
+  box-shadow: 4px 4px 0 var(--shadow);
+  object-fit: cover;
+}
+
+/* アイコンの分だけ横幅が狭くなるので、肩書きが2行に折り返さないようにする */
+.site-header p {
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  .site-header {
+    gap: 12px;
+  }
+
+  .avatar {
+    width: 56px;
+    height: 56px;
+  }
+}
