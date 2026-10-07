@@ -1,0 +1,12 @@
+<!-- 7x7 マスのドット絵で小文字の「a」 -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7 7" shape-rendering="crispEdges">
+  <rect width="7" height="7" fill="#51b9e3"/>
+  <g fill="#ffffff">
+    <rect x="2" y="1" width="3" height="1"/>
+    <rect x="5" y="2" width="1" height="1"/>
+    <rect x="2" y="3" width="4" height="1"/>
+    <rect x="1" y="4" width="1" height="1"/>
+    <rect x="5" y="4" width="1" height="1"/>
+    <rect x="2" y="5" width="4" height="1"/>
+  </g>
+</svg>

@@ -4,6 +4,7 @@
   --side-padding: 42px;
   --font-main: "DotGothic16", sans-serif;
   --text-color: #ffffff;
+  --text-sub: rgba(255, 255, 255, 0.8);
 }
 
 * {
@@ -26,6 +27,9 @@ body {
 .site {
   width: min(100%, var(--content-width));
   min-height: 100vh;
+  /* スマホは 100vh だとアドレスバーの分だけ画面より高くなってスクロールが出る。
+     dvh は実際に見えている高さなので、対応ブラウザではこちらが優先される */
+  min-height: 100dvh;
   margin: 0 auto;
   padding: 42px var(--side-padding) 18px;
   display: flex;
@@ -38,26 +42,312 @@ body {
 
 .site-header h1 {
   margin: 0;
-  font-size: 25px;
+  font-size: 32px;
   line-height: 1;
   font-weight: 400;
   letter-spacing: 0.04em;
 }
 
 .site-header p {
-  margin: 12px 0 0;
+  margin: 14px 0 0;
+  font-size: 18px;
 }
 
-@media (max-width: 360px) {
+/* ---------- 各セクション共通 ---------- */
+
+.section {
+  margin: 0 0 44px;
+}
+
+.section h2 {
+  margin: 0 0 16px;
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+}
+
+.section p {
+  margin: 0;
+  line-height: 1.7;
+}
+
+.section ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ---------- 「>」カーソル付きのリンク（works と links で共用） ---------- */
+
+/* カーソル・アイコン・文字を横一列に並べて、縦位置を中央で揃える */
+.menu-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 20px;
+  color: inherit;
+  text-decoration: none;
+}
+
+/* 行頭の「>」はゲームの選択カーソルのイメージ。ホバー中だけ右にずらす */
+.menu-link::before {
+  content: ">";
+  transition: transform 0.15s;
+}
+
+.menu-link:hover::before,
+.menu-link:focus-visible::before {
+  transform: translateX(4px);
+}
+
+/* 下線は文字部分だけに引く */
+.menu-link:hover span,
+.menu-link:focus-visible span {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* ---------- works ---------- */
+
+.work + .work {
+  margin-top: 28px;
+}
+
+.work h3 {
+  margin: 0 0 6px;
+  font-weight: 400;
+}
+
+/* 説明文とタグは、タイトルの「>」の分だけ右に下げて文字の頭を揃える */
+.work > p,
+.work .tags {
+  padding-left: 24px;
+}
+
+.work > p {
+  color: var(--text-sub);
+}
+
+.work .tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.work .tags li {
+  padding: 2px 8px;
+  border: 1px solid currentColor;
+  font-size: 13px;
+}
+
+/* ---------- speedrun ---------- */
+
+/* 見出しのすぐ下に置く小さい補足 */
+.section .section-note {
+  margin: -8px 0 20px;
+  font-size: 14px;
+  color: var(--text-sub);
+}
+
+.section-note a {
+  color: inherit;
+  text-underline-offset: 3px;
+}
+
+.runs li + li {
+  margin-top: 10px;
+}
+
+/* 1行 = 1記録。左にゲーム名とカテゴリ、右にタイムを置く。行全体が記録ページへのリンク */
+.run {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 6px 0 6px 12px;
+  border-left: 2px solid var(--text-sub);
+  color: inherit;
+  text-decoration: none;
+}
+
+.run:hover,
+.run:focus-visible {
+  border-left-color: var(--text-color);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.run p {
+  line-height: 1.4;
+}
+
+/* min-width: 0 がないと、flex の中で長いゲーム名が縮まずにはみ出す */
+.run-info {
+  min-width: 0;
+}
+
+/* 長いゲーム名は1行に収めて、入りきらない分は「…」で省略する */
+.run-game {
+  font-size: 13px;
+  color: var(--text-sub);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.run-category {
+  font-size: 16px;
+}
+
+.run-detail {
+  font-size: 13px;
+  color: var(--text-sub);
+}
+
+/* 桁ごとの幅を揃えて、タイムが縦に並んだときにずれないようにする */
+.run-time {
+  font-size: 18px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* ---------- links ---------- */
+
+.links li + li {
+  margin-top: 12px;
+}
+
+/* アイコンは文字色（currentColor）で塗るので、背景色を変えても白のまま追従する */
+.links .icon {
+  width: 26px;
+  height: 26px;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
+/* ---------- footer ---------- */
+
+/* .site が縦並びの flex なので、margin-top: auto で中身が少なくても一番下に張り付く */
+.site-footer {
+  margin-top: auto;
+  padding-top: 24px;
+  color: var(--text-sub);
+}
+
+/* ---------- スマホ：スクロールせずに1画面に収まるよう、余白と文字を詰める ---------- */
+
+@media (max-width: 480px) {
   :root {
     --side-padding: 28px;
   }
 
   .site {
-    padding-top: 30px;
+    padding: 26px var(--side-padding) 12px;
+  }
+
+  .site-header {
+    margin-bottom: 22px;
   }
 
   .site-header h1 {
-    font-size: 22px;
+    font-size: 28px;
+  }
+
+  .site-header p {
+    margin-top: 8px;
+    font-size: 15px;
+  }
+
+  .section {
+    margin-bottom: 20px;
+  }
+
+  .section h2 {
+    margin-bottom: 6px;
+    font-size: 18px;
+  }
+
+  /* .section p にすると speedrun の文字サイズまで上書きしてしまうので、本文だけを指定する */
+  .about p,
+  .work > p {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .menu-link {
+    font-size: 16px;
+  }
+
+  .work h3 {
+    margin-bottom: 2px;
+  }
+
+  .work .tags {
+    margin-top: 6px;
+  }
+
+  .work .tags li {
+    font-size: 12px;
+  }
+
+  .section .section-note {
+    margin: -4px 0 8px;
+    font-size: 12px;
+  }
+
+  .runs li + li {
+    margin-top: 6px;
+  }
+
+  .run {
+    padding: 2px 0 2px 10px;
+  }
+
+  .run p {
+    line-height: 1.3;
+  }
+
+  .run-game,
+  .run-detail {
+    font-size: 12px;
+  }
+
+  .run-category {
+    font-size: 14px;
+  }
+
+  .run-time {
+    font-size: 16px;
+  }
+
+  /* links は縦に並べず、横一列にして高さを節約する */
+  .links ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+  }
+
+  .links li + li {
+    margin-top: 0;
+  }
+
+  .links .icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .site-footer {
+    padding-top: 12px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 360px) {
+  :root {
+    --side-padding: 20px;
+  }
+
+  .site-header h1 {
+    font-size: 26px;
   }
 }
