@@ -1,5 +1,7 @@
 :root {
   --page-bg: #51b9e3;
+  --accent: #ffe15a;
+  --shadow: #2a7fa8;
   --content-width: 414px;
   --side-padding: 42px;
   --font-main: "DotGothic16", sans-serif;
@@ -18,7 +20,11 @@ body {
 }
 
 body {
-  background: var(--page-bg);
+  background-color: var(--page-bg);
+  background-image:
+    linear-gradient(180deg, rgba(255,255,255,0.14), rgba(255,255,255,0) 40%),
+    radial-gradient(rgba(255,255,255,0.18) 1.5px, transparent 1.5px);
+  background-size: auto, 16px 16px;
   color: var(--text-color);
   font-family: var(--font-main);
 }
@@ -349,5 +355,85 @@ body {
 
   .site-header h1 {
     font-size: 26px;
+  }
+}
+
+/* ---------- デザイン強化（ドット絵 + 黄色アクセント） ---------- */
+
+/* 名前と見出しにドット絵風のずらし影 */
+.site-header h1 {
+  text-shadow: 3px 3px 0 var(--shadow);
+}
+
+.site-header p {
+  color: var(--accent);
+}
+
+/* 見出しの前に黄色い四角、下にドット線 */
+.section h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-shadow: 2px 2px 0 var(--shadow);
+}
+
+.section h2::before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  background: var(--accent);
+  box-shadow: 2px 2px 0 var(--shadow);
+}
+
+.section h2::after {
+  content: "";
+  flex: 1;
+  border-top: 3px dotted rgba(255, 255, 255, 0.55);
+}
+
+/* リンクのカーソルとホバー色 */
+.menu-link::before {
+  color: var(--accent);
+}
+
+.menu-link:hover,
+.menu-link:focus-visible {
+  color: var(--accent);
+}
+
+/* タグはドット枠の白カード風 */
+.work .tags li {
+  border: 0;
+  background: rgba(255, 255, 255, 0.92);
+  color: #1f6d94;
+  box-shadow: 2px 2px 0 var(--shadow);
+}
+
+/* speedrun の行はカード化、タイムを黄色に */
+.run {
+  border-left: 4px solid var(--accent);
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 3px 3px 0 var(--shadow);
+}
+
+.run:hover,
+.run:focus-visible {
+  border-left-color: var(--accent);
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.run-time {
+  color: var(--accent);
+}
+
+/* 「>」を点滅させる(動きを減らす設定の人は止める) */
+@media (prefers-reduced-motion: no-preference) {
+  .site-header p::after {
+    content: "_";
+    animation: blink 1s steps(1) infinite;
+  }
+
+  @keyframes blink {
+    50% { opacity: 0; }
   }
 }
