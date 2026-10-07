@@ -240,9 +240,9 @@ body {
   color: var(--text-sub);
 }
 
-/* ---------- 画面サイズに関係なく、スマホと同じ詰めた表示にして1画面に収める ---------- */
+/* ---------- スマホ：スクロールせずに1画面に収まるよう、余白と文字を詰める ---------- */
 
-@media all {
+@media (max-width: 480px) {
   :root {
     --side-padding: 28px;
   }
@@ -436,4 +436,20 @@ body {
   @keyframes blink {
     50% { opacity: 0; }
   }
+}
+
+/* タグの頭に付ける小さいロゴ。文字色で塗る */
+.work .tags li {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  font-size: 14px;
+}
+
+.tag-icon {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+  flex-shrink: 0;
 }
