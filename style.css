@@ -487,3 +487,20 @@ body {
     height: 56px;
   }
 }
+
+/* ---------- about の言語名に付けるアイコン ---------- */
+
+/* アイコンと名前が行の途中で離れないよう、ひとまとまりにする */
+.lang {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  white-space: nowrap;
+}
+
+.lang-icon {
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+  flex-shrink: 0;
+}
