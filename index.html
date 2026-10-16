@@ -18,6 +18,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <!-- 崩壊版：最初は元のレイアウトで表示し、少しすると全部が力尽きて崩れ落ちる -->
+    <link rel="stylesheet" href="akirame.css">
 </head>
 <body>
     <main class="site">
@@ -93,6 +95,23 @@
             </ul>
         </section>
 
+        <!-- GitHub Pages なので送信先はない。送信すると「送るのをやめた」と表示して、GitHub へ案内する -->
+        <section class="section contact">
+            <h2>contact</h2>
+            <p class="contact-pitch">Webは得意です。お仕事の依頼を、ずっと待っています。</p>
+            <p>お仕事のご依頼、感想、それから「もうやめたら」という意見も受け付けています。前の周回で同じことを言ってくれた人には、先にお礼を言っておきます。ありがとうございました。</p>
+            <form class="contact-form" id="contact-form" novalidate>
+                <label for="contact-name">name
+                    <input id="contact-name" name="name" autocomplete="off" placeholder="あなた">
+                </label>
+                <label for="contact-msg">message
+                    <textarea id="contact-msg" name="message" placeholder="前にも同じことを書いた気がしても"></textarea>
+                </label>
+                <button class="menu-link contact-send" type="submit"><span>送信する</span></button>
+                <p class="contact-out" id="contact-out" role="status" aria-live="polite"></p>
+            </form>
+        </section>
+
         <section class="section links">
             <h2>links</h2>
             <ul>
@@ -137,5 +156,6 @@
             <small>&copy; 2026 alyce　……もういいか</small>
         </footer>
     </main>
+    <script src="akirame.js"></script>
 </body>
 </html>
