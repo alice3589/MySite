@@ -1,0 +1,154 @@
+/* ---------- 崩壊版（akirame.html 専用） ---------- */
+
+/* 崩れた要素が横にはみ出しても、ページが横スクロールしないようにする */
+html,
+body {
+  overflow-x: clip;
+}
+
+/* ずれる量の倍率。スマホは画面が狭いので半分にする */
+:root {
+  --k: 1;
+}
+
+@media (max-width: 480px) {
+  :root {
+    --k: 0.5;
+  }
+}
+
+/* 崩れたあとは空も少し暗くなる */
+body {
+  transition: background-color 3s ease;
+}
+
+body.collapsed {
+  background-color: #6c787f;
+}
+
+/* akirame.js が崩す要素に .slump を付けて、--tx / --ty / --r / --d を入れる */
+.slump {
+  transition: transform 1.2s cubic-bezier(0.6, 0.04, 0.4, 1.35) var(--d, 0s);
+}
+
+.collapsed .slump {
+  transform:
+    translate(calc(var(--tx, 0px) * var(--k)), calc(var(--ty, 0px) * var(--k)))
+    rotate(var(--r, 0deg));
+}
+
+/* ホバーやフォーカスで、少しだけ起き上がろうとする。離すとまた倒れる */
+.collapsed .slump.lift:hover,
+.collapsed .slump.lift:focus-within {
+  transition-delay: 0s;
+  transition-duration: 0.5s;
+  transform:
+    translate(calc(var(--tx, 0px) * var(--k) * 0.4), calc(var(--ty, 0px) * var(--k) * 0.4))
+    rotate(calc(var(--r, 0deg) * 0.3));
+}
+
+/* 見出しは1文字ずつ span にして、後ろの文字ほど垂れ下がる */
+.letters {
+  display: inline-flex;
+}
+
+.letters span {
+  display: inline-block;
+  white-space: pre;
+}
+
+/* リンク欄は左上の1本の釘でぶら下がっている */
+.links.slump {
+  transform-origin: 8px 8px;
+}
+
+.links h2 {
+  position: relative;
+}
+
+.links h2 .nail {
+  position: absolute;
+  left: -6px;
+  top: -6px;
+  width: 6px;
+  height: 6px;
+  background: var(--text-sub);
+  box-shadow: 1px 1px 0 var(--shadow);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slump,
+  body {
+    transition: none;
+  }
+}
+
+/* ---------- contact ---------- */
+
+.contact-form {
+  display: grid;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.contact-form label {
+  display: grid;
+  gap: 4px;
+  font-size: 13px;
+  color: var(--text-sub);
+}
+
+/* 入力欄は箱にせず、点線の下線だけにする */
+.contact-form input,
+.contact-form textarea {
+  font: inherit;
+  font-size: 15px;
+  color: var(--text-color);
+  background: rgba(255, 255, 255, 0.06);
+  border: 0;
+  border-bottom: 2px dotted rgba(238, 241, 242, 0.5);
+  border-radius: 0;
+  padding: 6px 4px;
+}
+
+.contact-form textarea {
+  min-height: 72px;
+  resize: vertical;
+}
+
+.contact-form ::placeholder {
+  color: rgba(238, 241, 242, 0.4);
+}
+
+.contact-form input:focus-visible,
+.contact-form textarea:focus-visible {
+  outline: 2px dotted var(--accent);
+  outline-offset: 2px;
+}
+
+/* 送信ボタンは works / links と同じ「>」付きリンクの見た目にする */
+.contact-send {
+  justify-self: start;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.section .contact-out {
+  min-height: 1.7em;
+  font-size: 13px;
+  color: var(--text-sub);
+}
+
+.contact-out a {
+  color: inherit;
+  text-underline-offset: 3px;
+}
+
+/* 依頼を待っている一文は、本文より少し明るくして目に入りやすくする */
+.section .contact-pitch {
+  margin-bottom: 8px;
+  color: var(--accent);
+}
