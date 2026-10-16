@@ -1,12 +1,12 @@
-/* ---------- 崩壊版（akirame.html 専用） ---------- */
+/* ---------- 崩れる用 ---------- */
 
-/* 崩れた要素が横にはみ出しても、ページが横スクロールしないようにする */
+/* はみ出しても横スクロールさせない */
 html,
 body {
   overflow-x: clip;
 }
 
-/* ずれる量の倍率。スマホは画面が狭いので半分にする */
+/* スマホはずれる量を半分に */
 :root {
   --k: 1;
 }
@@ -17,7 +17,7 @@ body {
   }
 }
 
-/* 崩れたあとは空も少し暗くなる */
+/* 崩れたら少し暗くする */
 body {
   transition: background-color 3s ease;
 }
@@ -26,7 +26,7 @@ body.collapsed {
   background-color: #6c787f;
 }
 
-/* akirame.js が崩す要素に .slump を付けて、--tx / --ty / --r / --d を入れる */
+/* .slump は akirame.js が付ける */
 .slump {
   transition: transform 1.2s cubic-bezier(0.6, 0.04, 0.4, 1.35) var(--d, 0s);
 }
@@ -37,7 +37,7 @@ body.collapsed {
     rotate(var(--r, 0deg));
 }
 
-/* ホバーやフォーカスで、少しだけ起き上がろうとする。離すとまた倒れる */
+/* ホバーすると少し起き上がる */
 .collapsed .slump.lift:hover,
 .collapsed .slump.lift:focus-within {
   transition-delay: 0s;
@@ -47,7 +47,7 @@ body.collapsed {
     rotate(calc(var(--r, 0deg) * 0.3));
 }
 
-/* 見出しは1文字ずつ span にして、後ろの文字ほど垂れ下がる */
+/* 見出しの1文字ずつ */
 .letters {
   display: inline-flex;
 }
@@ -57,7 +57,7 @@ body.collapsed {
   white-space: pre;
 }
 
-/* リンク欄は左上の1本の釘でぶら下がっている */
+/* linksは左上の釘で止まってる */
 .links.slump {
   transform-origin: 8px 8px;
 }
@@ -98,7 +98,7 @@ body.collapsed {
   color: var(--text-sub);
 }
 
-/* 入力欄は箱にせず、点線の下線だけにする */
+/* 入力欄は下線だけ */
 .contact-form input,
 .contact-form textarea {
   font: inherit;
@@ -126,7 +126,7 @@ body.collapsed {
   outline-offset: 2px;
 }
 
-/* 送信ボタンは works / links と同じ「>」付きリンクの見た目にする */
+/* 送信ボタンはリンクと同じ見た目に */
 .contact-send {
   justify-self: start;
   padding: 0;
@@ -147,7 +147,7 @@ body.collapsed {
   text-underline-offset: 3px;
 }
 
-/* 依頼を待っている一文は、本文より少し明るくして目に入りやすくする */
+/* 依頼待ちの一文だけ色を付ける */
 .section .contact-pitch {
   margin-bottom: 8px;
   color: var(--accent);
